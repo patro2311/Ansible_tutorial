@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+
+  - name: DELETE APACHE PACKAGE
+    dnf:
+      name: httpd
+      state: absent
+
+  - name: DELETE TMUX 
+    dnf:
+      name: tmux
+      state: absent 

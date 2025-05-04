@@ -1,0 +1,43 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: UPDATE REPOSITORY INDEX
+    dnf:
+      update_cache: yes
+    when: ansible_distribution == "CentOS" and ansible_distribution_version == "9"
+
+
+  - name: INSTALL APACHE PACKAGE
+    dnf:
+      name: httpd
+      state: present
+    when: ansible_distribution == "CentOS" and ansible_distribution_version == "9"
+
+
+  - name: INSTALL PHP HELPER FOR APACHE SERVER 
+    dnf:
+      name: php
+      state: present 
+    when: ansible_distribution == "CentOS" and ansible_distribution_version == "9"
+
+  - name: UPDATE REPOSITORY INDEX
+    apt:
+      update_cache: yes
+    when: ansible_distribution in ["Ubuntu", "Debian"]
+
+
+  - name: INSTALL APACHE2 PACKAGE
+    apt:
+      name: apache2
+      state: present
+    when: ansible_distribution in ["Ubuntu", "Debian"]
+
+  - name: INSTALL PHP HELPER FOR APACHE2 SERVER
+    apt:
+      name: libapache2-mod-php
+      state: present
+    when: ansible_distribution in ["Ubuntu", "Debian"]
+
