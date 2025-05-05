@@ -1,0 +1,15 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: INSTALL APACHE for BOTH DISTRIBUTIOn (CentOS, UBUNTU)
+    ansible.builtin.package:
+      name:
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+      state: present
+      update_cache: yes
+
+

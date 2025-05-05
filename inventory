@@ -1,1 +1,1 @@
-192.168.0.33
+192.168.0.33 apache_package=httpd php_package=php

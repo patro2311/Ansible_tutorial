@@ -40,4 +40,3 @@
       name: libapache2-mod-php
       state: present
     when: ansible_distribution in ["Ubuntu", "Debian"]
-
