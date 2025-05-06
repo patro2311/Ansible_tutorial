@@ -1,0 +1,41 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Install updates (CentOS SERVERS)
+    dnf:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+
+  - name: Install updates (Ubundu, Debian)
+    apt:
+      name:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution in ["Ubuntu", "Debian"]
+
+
+- hosts: Repo_servers
+  become: true
+  tasks:
+
+  - name: INSTALATION HTTPD 
+    dnf:
+      name:
+        - httpd
+        - php
+      state: present
+    when: ansible_distribution == "CentOS"
+
+
+  - name: INSTALL APACHE2
+    apt:
+      name:
+        - apache2
+        - libapache2-mod-php
+      state: present
+    when: ansible_distribution in ["Ubuntu", "Debian"] 
