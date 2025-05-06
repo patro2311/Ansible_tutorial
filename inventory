@@ -1,1 +1,6 @@
-192.168.0.33 apache_package=httpd php_package=php
+[Repo_servers]
+192.168.0.33
+[Ubuntu_servers]
+
+[linux_mint]
+
