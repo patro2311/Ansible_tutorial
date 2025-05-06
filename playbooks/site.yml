@@ -2,7 +2,7 @@
 
 - hosts: all
   become: true
-  tasks:
+  pre_tasks:
 
   - name: Install updates (CentOS SERVERS)
     dnf:
@@ -17,6 +17,8 @@
       upgrade: dist
       update_cache: yes
     when: ansible_distribution in ["Ubuntu", "Debian"]
+
+
 
 
 - hosts: Repo_servers
@@ -39,3 +41,18 @@
         - libapache2-mod-php
       state: present
     when: ansible_distribution in ["Ubuntu", "Debian"] 
+
+
+
+
+- hosts: Linux_mint
+  become: true
+  tasks:
+
+  - name: INSTALL SAMBA
+    apt:
+      name:
+        - samba-server
+        - php-helper
+      state: latest
+    when: ansible_distribution == "Ubuntu"
