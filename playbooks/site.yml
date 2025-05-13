@@ -1,58 +1,112 @@
 ---
 
-- hosts: all
-  become: true
-  pre_tasks:
-
-  - name: Install updates (CentOS SERVERS)
-    dnf:
-      update_only: yes
-      update_cache: yes
-    when: ansible_distribution == "CentOS"
-
-
-  - name: Install updates (Ubundu, Debian)
-    apt:
-      name:
-      upgrade: dist
-      update_cache: yes
-    when: ansible_distribution in ["Ubuntu", "Debian"]
+  - hosts: all
+    become: true
+    tasks:
+    
+    - name: Update system packages (CentOS)
+      tags: always
+      dnf:
+        update_only: yes
+        update_cache: yes
+      when: ansible_distribution == "CentOS"
 
 
-
-
-- hosts: Repo_servers
-  become: true
-  tasks:
-
-  - name: INSTALATION HTTPD 
-    dnf:
-      name:
-        - httpd
-        - php
-      state: present
-    when: ansible_distribution == "CentOS"
-
-
-  - name: INSTALL APACHE2
-    apt:
-      name:
-        - apache2
-        - libapache2-mod-php
-      state: present
-    when: ansible_distribution in ["Ubuntu", "Debian"] 
+    - name: Update system package (Debian, Ubuntu)
+      tags: always
+      apt:
+        upgrade: dist
+        update_cache: yes
+      when: ansible_distribution in ["Debian", "Ubuntu"]
 
 
 
 
-- hosts: Linux_mint
-  become: true
-  tasks:
 
-  - name: INSTALL SAMBA
-    apt:
-      name:
-        - samba-server
-        - php-helper
-      state: latest
-    when: ansible_distribution == "Ubuntu"
+  - hosts: Repo_servers
+    become: true
+    tasks:
+
+    - name: INSTALL HTTPD (CentOS)
+      tags: centos, httpd
+      dnf:
+        name: 
+          - httpd
+          - php
+        state: present
+      when: ansible_distribution == "CentOS"
+
+
+    - name: Start HTTPD and Enable it (CentOS)
+      tags: centos, httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+      when: ansible_distribution == "CentOS"
+       
+
+    - name: Change the parameters in index file (Centos)
+      tags: centos, httpd
+      lineinfile: 
+        path: /var/www/html/index.html
+        regexp: 'Ansible is awesome'
+        firstmatch: yes
+        line: <p> Patko.bily@gmail.com </p>
+      when: ansible_distribution == "CentOS"
+      register: premenna
+
+
+
+
+
+    - name: Restart HTTPD (CentoOS)
+      service:
+        name: httpd
+        state: restarted
+      when: premenna.changed
+
+
+ 
+  - hosts: DEBIAN_servers
+    become: true
+    tasks: 
+ 
+    - name: INSTALL apache2 (Debian, Ubuntu)
+      tags: apache, apache2
+      apt:
+        name: apache2
+        state: present
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+
+
+    - name: Start apache2 (Debian, Ubuntu)
+      tags: apache, apache2
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+      when: ansible_distribution in ["Debian", "Ubuntu"] 
+ 
+
+    - name: Change the name in the file (Debian, Ubuntu)
+      tags: apache, apache2
+      lineinfile:
+        path: /var/www/html/index.html
+        regexp: 'Web-site test'
+        firstmatch: yes
+        line: <title>Skusobna webova stranka</title>
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+      register: apache
+   
+    - name: Restart apache (Debian, Ubuntu)
+      tags: apache, apache2
+      service:
+        name: apache2
+        state: restarted
+      when: apache.changed
+
+
+
+
+
