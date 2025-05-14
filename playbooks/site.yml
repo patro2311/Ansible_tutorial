@@ -4,19 +4,19 @@
     become: true
     tasks:
     
-    - name: Update system packages (CentOS)
+    - name: Update repo-cache (CentOS)
       tags: always
       dnf:
-        update_only: yes
         update_cache: yes
+      changed_when: false
       when: ansible_distribution == "CentOS"
 
 
-    - name: Update system package (Debian, Ubuntu)
+    - name: Update repo-cache (Debian, Ubuntu)
       tags: always
       apt:
-        upgrade: dist
         update_cache: yes
+      changed_when: false 
       when: ansible_distribution in ["Debian", "Ubuntu"]
 
 
