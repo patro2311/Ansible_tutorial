@@ -1,2 +1,0 @@
-Last time, we created some atribute. Now the install playbook is too messy. So the next leason, we will learn how to clean it and make it looks better. 
-
