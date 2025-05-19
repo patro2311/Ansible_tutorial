@@ -1,0 +1,28 @@
+- name: install apache2
+  package:
+    name:
+      - "{{ apache_package_name }}"
+      - "{{ php_package_name }}"
+    state: present
+  when: ansible_distribution in ["Debian", "ubuntu"]
+
+
+
+- name: Start apache2 (Debian, Ubuntu)
+  tags: apache, apache2
+  service:
+    name: "{{ apache_service }}"
+    state: started
+    enabled: yes
+  when: ansible_distribution in ["Debian", "Ubuntu"] 
+ 
+
+- name: Change the name in the file (Debian, Ubuntu)
+  tags: apache, apache2
+  lineinfile:
+    path: /var/www/html/index.html
+    regexp: '^kusobna webova stranka1</title>'
+    firstmatch: yes
+    line: <title>Skusobna webova stranka2</title>
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+  notify: Restart_Apache2

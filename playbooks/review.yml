@@ -1,0 +1,86 @@
+---
+
+  - hosts: all
+    become: true
+    tasks:
+
+    - name: Update REPO-cache (CentOS)
+      tags: always
+      dnf: 
+        update_cache: yes
+      changed_when: false
+      when: ansible_distribution == "CentOS"
+
+    - name: Update REPO-cache (CentOs)
+      tags: always
+      apt:
+        update_cache: yes
+      changed_when: false
+      when: ansible_distribution == "Debian"
+
+  - hosts: Repo_servers
+    become: true
+    tasks: 
+
+    - name: Install HTTPD (CentOS)
+      tags: httpd, centos
+      dnf:
+        name: httpd
+        state: present
+      when: ansible_distribution == "CentOS"
+    
+    
+    - name: Start, Enable HTTPD (CentOS)
+      tags: centos, httpd
+      service: 
+        name: httpd
+        state: started
+        enabled: yes
+      when: ansible_distribution == "CentOS"
+ 
+    - name: Change the Listening port in hosts file (CentOS)
+      tags: httpd, centos
+      lineinfile:
+        path: /etc/hosts_uncchanged
+        regexp: '^10'
+        line: "229.86.20.12"
+      when: ansible_distribution == "CentOS"
+      register: httpd
+
+    - name: Restart HTTPD (CentOS)
+      service:
+        name: httpd
+        state: restarted
+      when: httpd.changed
+
+
+
+  - hosts: DEBIAN_servers
+    become: true
+    tasks:
+   
+    - name: install apache2 (Debian, Ubuntu)
+      tags: debian, apache2, apache
+      apt: 
+        name: apache2
+        state: present
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+
+    - name: Change the hosts file (Debian, Ubuntu)
+      tags: debian, apache2, apache
+      lineinfile: 
+        path: /etc/hosts_unchanged
+        regexp: '^ff'
+        line: "ff00:ff002:02::001"
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+      register: apache
+ 
+    - name: Restart Apache2 (Debian, Ubuntu)
+      tags: debian, apache, apache2
+      service:
+        name: apache2
+        state: restarted
+      when: apache.changed
+
+
+ 
