@@ -1,0 +1,10 @@
+-name: add epel repository
+  tags: repo
+  dnf:
+    name: epel-release
+    state: present
+    update_cache: yes
+
+- name: enable epel repository
+  tags: repo
+  command: dnf config-manager --set-enabled epel

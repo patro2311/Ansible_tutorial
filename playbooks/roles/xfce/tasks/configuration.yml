@@ -1,0 +1,70 @@
+---
+
+-name: install xfce packages
+  tags: configuration
+  dnf:
+    name: "xfce*"
+    state: present
+    update_cache: yes
+
+-name: enable gdm service
+  tags: configuration
+  systemd:
+    name: gdm
+    enabled: yes
+    state: started
+
+- name: set default target to graphical
+  tags: configuration
+  command: systemctl set-default graphical.target
+
+-name: Copy xfce configuration files to force xfce as default desktop environment
+  tags: configuration
+  copy:
+    src: standard
+    dest: /etc/accountsservice/user-templates/standard
+    owner: root
+    group: root
+    mode: 644
+ 
+-name: Hide user options to choose other desktop environments than xfce
+  tags: configuration
+  lineinfile:
+    path: "{{ item }}"
+    regexp: '^#?WaylandEnable='
+    line: 'WaylandEnable=false'
+  with_items:
+    - /etc/gdm/custom.conf
+
+
+- name: Create a DIR for unused dispay sessions
+  tags: configuration
+  file:
+    path: /usr/share/xsessions/unused
+    state: directory
+    owner: root
+    group: root
+    mode: "755" 
+
+- name: Move unused display sessions to unused folder
+  tags: configuration
+  shell: mv /usr/share/xsessions/* /usr/share/xsessions/unused/
+
+- name: copy config from unused folder to xfce session
+  tags: configuration
+  copy:
+    src: /usr/share/xsessions/unused/xfce.desktop
+    dest: /usr/share/xsessions/xfce.desktop
+    owner: root
+    group: root
+    mode: :644"
+  
+- name: copy template for control panel menu
+  tags: configuration
+  template:
+    src: xfce4-panel.j2
+    dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
+    owner: root
+    group: root
+    mode: 644
+  notify: restart gdm
