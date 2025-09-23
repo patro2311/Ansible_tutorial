@@ -1,33 +1,35 @@
 ---
 
--name: install xfce packages
+- name: install xfce packages
   tags: configuration
   dnf:
-    name: "xfce*"
+    name: '@xfce'
     state: present
     update_cache: yes
+  when: ansible_facts['os_family'] == "CentOS" and ansible_facts['ansible_distribution_major_version'] == "9"
 
--name: enable gdm service
+- name: enable gdm service
   tags: configuration
   systemd:
     name: gdm
     enabled: yes
     state: started
 
-- name: set default target to graphical
-  tags: configuration
-  command: systemctl set-default graphical.target
+- name: Set default target to graphical.target using shell
+  shell: systemctl set-default graphical.target 
+  args:
+    executable: /bin/bash
 
--name: Copy xfce configuration files to force xfce as default desktop environment
+- name: Copy xfce configuration files to force xfce as default desktop environment
   tags: configuration
   copy:
-    src: standard
+    src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/standard
     dest: /etc/accountsservice/user-templates/standard
     owner: root
     group: root
     mode: 644
  
--name: Hide user options to choose other desktop environments than xfce
+- name: Hide user options to choose other desktop environments than xfce
   tags: configuration
   lineinfile:
     path: "{{ item }}"
@@ -40,29 +42,39 @@
 - name: Create a DIR for unused dispay sessions
   tags: configuration
   file:
-    path: /usr/share/xsessions/unused
+    path: /usr/share/xsessions.disabled
     state: directory
     owner: root
     group: root
     mode: "755" 
 
+- name: Look if the folder contains the files
+  find:
+    path: /usr/share/xsessions
+    file_type: file
+    patterns: ".desktop"
+    excludes: xfce.display
+  register: configfiles  
+
 - name: Move unused display sessions to unused folder
-  tags: configuration
-  shell: mv /usr/share/xsessions/* /usr/share/xsessions/unused/
+  shell: mv /usr/share/xsessions/* /usr/share/xsessions.disabled
+  args:
+    executable: /bin/bash
+  when: configfiles.files
 
 - name: copy config from unused folder to xfce session
   tags: configuration
   copy:
-    src: /usr/share/xsessions/unused/xfce.desktop
+    src: /usr/share/xsessions.disabled/xfce.desktop
     dest: /usr/share/xsessions/xfce.desktop
     owner: root
     group: root
-    mode: :644"
+    remote_src: true
+    mode: "644"
   
 - name: copy template for control panel menu
-  tags: configuration
   template:
-    src: xfce4-panel.j2
+    src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce-panel.j2
     dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
     owner: root
     group: root

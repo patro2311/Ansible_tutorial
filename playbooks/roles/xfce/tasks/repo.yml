@@ -1,4 +1,4 @@
--name: add epel repository
+- name: add epel repository
   tags: repo
   dnf:
     name: epel-release

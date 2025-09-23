@@ -1,0 +1,7 @@
+---
+
+- name: Include repo task
+  include_tasks: repo.yml
+
+- name: Include configuration tasks
+  include_tasks: configuration.yml

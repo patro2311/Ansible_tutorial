@@ -4,5 +4,6 @@
 [DEBIAN_servers]
 192.168.0.55
 
-[linux_mint]
+[xfce]
+192.168.0.250
 

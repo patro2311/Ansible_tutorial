@@ -1,0 +1,6 @@
+---
+
+- hosts: xfce
+  become: true
+  roles:
+    - xfce
