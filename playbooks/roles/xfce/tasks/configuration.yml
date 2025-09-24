@@ -52,26 +52,16 @@
   find:
     path: /usr/share/xsessions
     file_type: file
-    patterns: ".desktop"
-    excludes: xfce.display
+    patterns: "*.desktop"
+    excludes: xfce.desktop
   register: configfiles  
 
 - name: Move unused display sessions to unused folder
   shell: mv /usr/share/xsessions/* /usr/share/xsessions.disabled
   args:
     executable: /bin/bash
-  when: configfiles.files
+  when: configfiles.matched > 0
 
-- name: copy config from unused folder to xfce session
-  tags: configuration
-  copy:
-    src: /usr/share/xsessions.disabled/xfce.desktop
-    dest: /usr/share/xsessions/xfce.desktop
-    owner: root
-    group: root
-    remote_src: true
-    mode: "644"
-  
 - name: copy template for control panel menu
   template:
     src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce-panel.j2
