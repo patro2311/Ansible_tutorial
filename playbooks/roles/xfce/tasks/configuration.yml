@@ -58,7 +58,8 @@
 
 - name: Move unused sessions (excluding xfce.desktop)
   no_log: true
-  command: mv "{{ item.path }}" /usr/share/xsessions.disabled/
+  command:
+    cmd: mv "{{ item.path }}" /usr/share/xsessions.disabled/
   loop: "{{ desktopfile.files }}"
   when: desktopfile.files
 
