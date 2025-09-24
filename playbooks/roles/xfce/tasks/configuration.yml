@@ -53,7 +53,7 @@
     path: /usr/share/xsessions
     file_type: file
     patterns: "*.desktop"
-    excludes: xfce.desktop
+    excludes: "xfce.desktop"
   register: configfiles  
 
 - name: Move unused display sessions to unused folder
