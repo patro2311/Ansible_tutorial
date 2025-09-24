@@ -6,7 +6,7 @@
     name: '@xfce'
     state: present
     update_cache: yes
-  when: ansible_facts['os_family'] == "CentOS" and ansible_facts['ansible_distribution_major_version'] == "9"
+  when: ansible_facts['os_family'] == "RedHat" and ansible_facts['ansible_distribution_major_version'] == "9"
 
 - name: enable gdm service
   tags: configuration
@@ -57,13 +57,14 @@
   register: desktopfile  
 
 - name: Move unused sessions (excluding xfce.desktop)
+  no_log: true
   command: mv "{{ item.path }}" /usr/share/xsessions.disabled/
   loop: "{{ desktopfile.files }}"
   when: desktopfile.files
 
 - name: copy template for control panel menu
   template:
-    src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce-panel.j2
+    src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-panel.j2
     dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
     owner: root
     group: root
