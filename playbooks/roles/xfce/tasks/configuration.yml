@@ -54,12 +54,12 @@
     file_type: file
     patterns: "*.desktop"
     excludes: "xfce.desktop"
-  register: configfiles  
+  register: desktopfile  
 
 - name: Move unused sessions (excluding xfce.desktop)
   command: mv "{{ item.path }}" /usr/share/xsessions.disabled/
-  loop: "{{ configfiles.files }}"
-  when: configfiles.files
+  loop: "{{ desktopfile.files }}"
+  when: desktopfile.files
 
 - name: copy template for control panel menu
   template:
