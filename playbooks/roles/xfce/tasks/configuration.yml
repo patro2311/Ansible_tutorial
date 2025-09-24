@@ -56,10 +56,9 @@
     excludes: "xfce.desktop"
   register: configfiles  
 
-- name: Move unused display sessions to unused folder
-  shell: mv /usr/share/xsessions/* /usr/share/xsessions.disabled
-  args:
-    executable: /bin/bash
+name: Move unused sessions (excluding xfce.desktop)
+  command: mv "{{ item.path }}" /usr/share/xsessions.disabled/
+  loop: "{{ configfiles.files }}"
   when: configfiles.matched > 0
 
 - name: copy template for control panel menu
