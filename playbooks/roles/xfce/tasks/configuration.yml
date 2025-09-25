@@ -97,7 +97,7 @@
     dest: "{{ item.dest }}"
     owner: root
     group: root
-    mode: 644
+    mode: "0644"
   loop:
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
    # - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
