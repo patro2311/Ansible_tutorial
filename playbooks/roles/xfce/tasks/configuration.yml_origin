@@ -3,11 +3,7 @@
 - name: install xfce packages
   tags: configuration
   dnf:
-    name: 
-     - '@xfce'
-     - '@base-x'
-     - dbus-x11
-     - gdm
+    name: '@xfce'
     state: present
     update_cache: yes
   when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "9"
@@ -43,7 +39,7 @@
     - /etc/gdm/custom.conf
 
 
-- name: Create a DIR for unused dispay sessions and for a
+- name: Create a DIR for unused dispay sessions
   tags: configuration
   file:
     path: /usr/share/xsessions.disabled
@@ -51,30 +47,6 @@
     owner: root
     group: root
     mode: "755" 
-
-- name: Make sure that /etc/skel/Desktop exists
-  find:
-    path: /etc/skel/Desktop
-    file_type: directory
-  register: skeldir
-
-- name: create /etc/skel/Desktop
-  file:
-    name: /etc/skel/Desktop
-    state: directory
-  when: skeldir.matched
-
-- name: Copy Shortcut to /etc/skel/Desktop
-  tags: configuration
-  copy:
-    src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/
-    dest: /etc/skel/Desktop/
-    owner: root
-    group: root
-    mode: "0755"
-  with_items:
-     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Firefox.desktop, dest: /etc/skel/Desktop/Firefox.desktop }
-     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
 
 - name: Look if the folder contains the files
   find:
@@ -86,24 +58,15 @@
 
 - name: Move unused sessions (excluding xfce.desktop)
   no_log: true
-  command:
-    cmd: mv "{{ item.path }}" /usr/share/xsessions.disabled/
+  command: mv "{{ item.path }}" /usr/share/xsessions.disabled/
   loop: "{{ desktopfile.files }}"
   when: desktopfile.files
 
 - name: copy template for control panel menu
   template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+    src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-panel.j2
+    dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
     owner: root
     group: root
     mode: 644
-  loop:
-    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
-   # - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
   notify: restart gdm
-
-
-    
-
-
