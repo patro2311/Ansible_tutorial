@@ -73,4 +73,9 @@
   loop:
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce-panel.xml }
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
+
+- name: name: pkill xfconfd
+  command: pkill xfconfd
+  ignore_errors: yes
   notify: restart gdm
+
