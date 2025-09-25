@@ -74,8 +74,9 @@
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce-panel.xml }
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
 
-- name: pkill xfconfd
-  command: pkill xfconfd
+- name: xfce4 settings reset
+  command: xfconf-query -c xfce4-panel -r
   ignore_errors: true
   notify: restart gdm
+
 
