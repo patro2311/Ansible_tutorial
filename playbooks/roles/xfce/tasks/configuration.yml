@@ -62,7 +62,10 @@
   file:
     name: /etc/skel/Desktop
     state: directory
-  when: skeldir.matched == > 0 
+    owner: root
+    group: root
+    mode: "0755"
+  when: skeldir.files > 0 
 
 - name: Copy Shortcut to /etc/skel/Desktop
   tags: configuration
