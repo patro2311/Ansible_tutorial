@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Terminal
+Comment=Use the command line
+Exec=gnome-terminal
+Icon=org.gnome.Terminal
+Path=
+Terminal=false
+StartupNotify=true
