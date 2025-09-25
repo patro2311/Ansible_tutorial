@@ -71,6 +71,6 @@
     group: root
     mode: 644
   loop:
-    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/default.j2, dest: /etc/xdg/xfce4/panel/default.xml }
+    # - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/default.j2, dest: /etc/xdg/xfce4/panel/default.xml }
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
   notify: restart gdm
