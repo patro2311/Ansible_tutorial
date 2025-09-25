@@ -6,10 +6,12 @@
     <value type="int" value="1"/>
     <property name="dark-mode" type="bool" value="true"/>
     <property name="panel-1" type="empty">
-      <property name="position" type="string" value="p=8;x=640;y=782"/>
+      <property name="position" type="string" value="p=8;x=640;y=786"/>
       <property name="length" type="uint" value="100"/>
       <property name="position-locked" type="bool" value="true"/>
+      <!-- 'icon-size' sets the pixel size of icons displayed in the panel -->
       <property name="icon-size" type="uint" value="16"/>
+      <!-- 'size' sets the overall height of the panel in pixels -->
       <property name="size" type="uint" value="30"/>
       <property name="plugin-ids" type="array">
         <value type="int" value="1"/>
@@ -25,10 +27,14 @@
         <value type="int" value="13"/>
         <value type="int" value="14"/>
       </property>
+      <property name="autohide-behavior" type="uint" value="0"/>
+      <property name="mode" type="uint" value="0"/>
     </property>
   </property>
   <property name="plugins" type="empty">
-    <property name="plugin-1" type="string" value="applicationsmenu"/>
+    <property name="plugin-1" type="string" value="applicationsmenu">
+      <property name="button-title" type="string" value="Start"/>
+    </property>
     <property name="plugin-2" type="string" value="tasklist">
       <property name="grouping" type="uint" value="1"/>
     </property>
@@ -40,9 +46,11 @@
     <property name="plugin-5" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
-    <property name="plugin-6" type="string" value="systray">
-      <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="ethernet network connection “ens33” active"/>
+        <!-- Example: Add more legacy items below as needed -->
+        <value type="string" value="ethernet network connection \"ens33\" active"/>
+      </property>
         <value type="string" value="ethernet network connection “ens33” active"/>
       </property>
     </property>
@@ -54,7 +62,9 @@
     <property name="plugin-11" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
-    <property name="plugin-12" type="string" value="clock"/>
+    <property name="plugin-12" type="string" value="clock">
+      <property name="mode" type="uint" value="2"/>
+    </property>
     <property name="plugin-13" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
