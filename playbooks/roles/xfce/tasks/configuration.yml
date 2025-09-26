@@ -78,7 +78,8 @@
   with_items:
      - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Firefox.desktop, dest: /etc/skel/Desktop/Firefox.desktop }
      - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
-      - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Application Finder.desktop dest: /etc/skel/Desktop/Application Finder.desktop}
+     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Application Finder.desktop dest: /etc/skel/Desktop/Application Finder.desktop}
+
 - name: Look if the folder contains the files
   find:
     path: /usr/share/xsessions
