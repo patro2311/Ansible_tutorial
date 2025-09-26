@@ -59,8 +59,7 @@
 
 - name: create /etc/skel/Desktop
   file:
-    path: /etc/skel/
-    name: Desktop
+    path: /etc/skel/Desktop
     state: directory
     owner: root
     group: root
@@ -78,7 +77,7 @@
   with_items:
      - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Firefox.desktop, dest: /etc/skel/Desktop/Firefox.desktop }
      - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
-     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Application Finder.desktop dest: /etc/skel/Desktop/Application Finder.desktop}
+     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Application Finder.desktop, dest: /etc/skel/Desktop/Application Finder.desktop }
 
 - name: Look if the folder contains the files
   find:
@@ -105,7 +104,8 @@
   loop:
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
-  notify: restart gdm
+  
+  - name: 
 
 
     
