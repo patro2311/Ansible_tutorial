@@ -64,11 +64,7 @@
     owner: root
     group: root
     mode: "0755"
-<<<<<<< HEAD
   when: skeldir.stat.exists == false
-=======
-  when: skeldir.files > 0 
->>>>>>> dad15b6137c55ec2b17a97574c36bf732cada468
 
 - name: Copy Shortcut to /etc/skel/Desktop
   tags: configuration
@@ -81,7 +77,7 @@
   with_items:
      - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Firefox.desktop, dest: /etc/skel/Desktop/Firefox.desktop }
      - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
-      - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Application Finder.desktop dest: /etc/skel/Desktop/Application Finder.desktop}
+     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Application Finder.desktop dest: /etc/skel/Desktop/Application Finder.desktop}
 - name: Look if the folder contains the files
   find:
     path: /usr/share/xsessions
