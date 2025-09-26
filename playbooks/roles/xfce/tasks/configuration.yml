@@ -53,11 +53,6 @@
     group: root
     mode: "755" 
 
-- name: Make sure that /etc/skel/Desktop exists
-  stat:
-    path: /etc/skel/Desktop
-  register: skeldir
-
 - name: create /etc/skel/Desktop
   file:
     path: /etc/skel/Desktop
@@ -65,7 +60,6 @@
     owner: root
     group: root
     mode: "0755"
-  when: skeldir.stat.exists == false
 
 - name: Copy Shortcut to /etc/skel/Desktop
   tags: configuration
