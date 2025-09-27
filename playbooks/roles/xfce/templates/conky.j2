@@ -1,0 +1,42 @@
+conky.config = {
+    update_interval = 1,
+    background = true,
+    double_buffer = true,
+    no_buffers = true,
+    
+    use_xft = true,
+    font = 'Monospace:size=10',
+    xftalpha = 1.0,
+    
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_argb_visual = true,
+    own_window_argb_value = 0,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = false,
+    draw_graph_borders = false,
+    
+    default_color = 'white', -- can change if needed
+    alignment = 'top_right',
+    gap_x = 20,
+    gap_y = 40,
+    
+    uppercase = false,
+    override_utf8_locale = true,
+}
+
+conky.text = [[
+HostName: ${nodename}
+
+User: ${USERNAME}
+
+OS Version: ${exec grep '^PRETTY_NAME=' /etc/os-release | cut -d= -f2 | tr -d '"'}
+
+IP_address: ${addr ens33}
+
+MacAddress: ${exec cat /sys/class/net/ens33/address}
+]]
