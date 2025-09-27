@@ -4,13 +4,7 @@
   tags: configuration
   dnf:
     name: 
-     - '@xfce'
-     - '@base-x'
-     - dbus-x11
-     - gdm
-     - xfce4-whiskermenu-plugin
-     - gnome-control-center
-     - conky
+      - "{{ xfce_packages }}"
     state: present
     update_cache: yes
   when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "9"
@@ -30,7 +24,7 @@
 - name: Copy xfce configuration files to force xfce as default desktop environment
   tags: configuration
   copy:
-    src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/standard
+    src: playbooks/roles/xfce/files/standard
     dest: /etc/accountsservice/user-templates/standard
     owner: root
     group: root
@@ -55,9 +49,7 @@
     group: root
     mode: "0755" 
   loop:
-    - /usr/share/xsessions.disabled
-    - /etc/skel/Desktop
-    - ~/.config/autostart
+    - "{{ dir }}"
 
 
 - name: Copy conky autostart file to /etc/xdg/autostart
@@ -69,8 +61,8 @@
     group: root
     mode: "0644"
   loop:
-    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/conky/conky.desktop, dest: /etc/xdg/autostart/conky.desktop }
-    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/conky/conky.desktop, dest: ~/.config/autostart/conky.desktop }
+    - { src: playbooks/roles/xfce/files/conky/conky.desktop, dest: /etc/xdg/autostart/conky.desktop }
+    - { src: playbooks/roles/xfce/files/conky/conky.desktop, dest: ~/.config/autostart/conky.desktop }
 
 - name: Copy Shortcut to /etc/skel/Desktop
   tags: configuration
@@ -81,9 +73,9 @@
     group: root
     mode: "0755"
   with_items:
-     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Firefox.desktop, dest: /etc/skel/Desktop/Firefox.desktop }
-     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
-     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Application Finder.desktop, dest: /etc/skel/Desktop/Application Finder.desktop }
+     - { src: playbooks/roles/xfce/files/shortcuts/Firefox.desktop, dest: /etc/skel/Desktop/Firefox.desktop }
+     - { src: playbooks/roles/xfce/files/shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
+     - { src: playbooks/roles/xfce/files/shortcuts/Application Finder.desktop, dest: /etc/skel/Desktop/Application Finder.desktop }
 
 - name: Look if the folder contains the files
   find:
@@ -108,10 +100,10 @@
     group: root
     mode: "0644"
   loop:
-    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
-    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
-    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
-    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/conky.j2, dest: /etc/conky/conky.conf }
+    - { src: playbooks/roles/xfce/templates/xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
+    - { src: playbooks/roles/xfce/templates/xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
+    - { src: playbooks/roles/xfce/templates/whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
+    - { src: playbooks/roles/xfce/templates/conky.j2, dest: /etc/conky/conky.conf }
   notify: restart gdm
 
 
