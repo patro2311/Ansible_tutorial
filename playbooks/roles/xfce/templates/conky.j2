@@ -36,7 +36,7 @@ User: ${USERNAME}
 
 OS Version: ${exec grep '^PRETTY_NAME=' /etc/os-release | cut -d= -f2 | tr -d '"'}
 
-IP_address: ${addr ens33}
+IP_address: ${{{ ansible_default_ipv4.address }}}
 
-MacAddress: ${exec cat /sys/class/net/ens33/address}
+MacAddress: ${exec cat /sys/class/net/{{ ansible_default_ipv4.alias }}/address}
 ]]
