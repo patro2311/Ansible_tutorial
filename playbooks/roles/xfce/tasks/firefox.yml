@@ -1,4 +1,5 @@
 ---
+
 - name: add a firefox website to the default bookmarks
   tags: firefox
   theforeman.foreman.firefox_bookmark:

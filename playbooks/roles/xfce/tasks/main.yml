@@ -1,10 +1,10 @@
 ---
 
-- name: Include repo task
-  include_tasks: repo.yml
+#- name: Include repo task
+#  include_tasks: repo.yml
 
-- name: Include configuration tasks
-  include_tasks: configuration.yml
+#- name: Include configuration tasks
+#  include_tasks: configuration.yml
 
 - name: Include firefox tasks
   include_tasks:  firefox.yml
