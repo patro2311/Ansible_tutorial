@@ -1,0 +1,6 @@
+xfce_packages:
+  - '@Xfce'
+  - '@base-x'
+  - xfce4-whiskermenu-plugin
+  - conky
+  - 
