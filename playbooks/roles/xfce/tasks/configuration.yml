@@ -72,9 +72,9 @@
     group: root
     mode: "0755"
   with_items:
-     - { src: ~/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Firefox.desktop, dest: /etc/skel/Desktop/Firefox.desktop }
-     - { src: ~/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
-     - { src: ~/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Application Finder.desktop, dest: /etc/skel/Desktop/Application Finder.desktop }
+     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Firefox.desktop, dest: /etc/skel/Desktop/Firefox.desktop }
+     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
+     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Application Finder.desktop, dest: /etc/skel/Desktop/Application Finder.desktop }
 
 - name: Look if the folder contains the files
   find:
@@ -99,10 +99,10 @@
     group: root
     mode: "0644"
   loop:
-    - { src: ~/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
-    - { src: ~/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
-    - { src: ~/Ansible_tutorial/playbooks/roles/xfce/templates/whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
-    - { src: ~/Ansible_tutorial/playbooks/roles/xfce/templates/conky.j2, dest: /etc/conky/conky.conf }
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/conky.j2, dest: /etc/conky/conky.conf }
   notify: restart gdm
 
 
