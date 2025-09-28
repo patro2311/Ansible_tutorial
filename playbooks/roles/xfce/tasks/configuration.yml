@@ -23,7 +23,7 @@
 - name: Copy xfce configuration files to force xfce as default desktop environment
   tags: configuration
   copy:
-    src: /playbooks/roles/xfce/files/standard
+    src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/standard
     dest: /etc/accountsservice/user-templates/standard
     owner: root
     group: root
