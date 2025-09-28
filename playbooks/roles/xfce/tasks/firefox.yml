@@ -1,0 +1,10 @@
+---
+- name: add a firefox website to the default bookmarks
+  tags: firefox
+  theforeman.foreman.firefox_bookmark:
+    user_name: "patrik"
+    password: "cokolada"
+    server_url: https://www.ansible.com/
+    name: "skuska_cez_ansible"
+    user: patrik
+    state: present
