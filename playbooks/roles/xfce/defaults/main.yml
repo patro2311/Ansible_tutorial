@@ -1,5 +1,13 @@
 xfce_packages:
-  - '@Xfce'
+  - '@xfce'
   - '@base-x'
+  - gdm
   - xfce4-whiskermenu-plugin
   - conky
+
+dir:
+  - /etc/xdg/autostart
+  - /etc/skel/Desktop
+  - /usr/share/xsessions.disabled
+  - ~/.config/autostart
+  
