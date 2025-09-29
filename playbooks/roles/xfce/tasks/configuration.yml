@@ -90,7 +90,7 @@
   loop: "{{ desktopfile.files }}"
   when: desktopfile.files
 
-  - name: Create DIRs for launcher
+- name: Create DIRs for launcher
   tags: configuration
   file:
     path: "{{ item }}"
