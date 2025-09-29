@@ -38,6 +38,20 @@
   with_items:
     - /etc/gdm/custom.conf
 
+- name: Look if the folder contains the files
+  find:
+    path: /usr/share/xsessions
+    file_type: file
+    patterns: "*.desktop"
+    excludes: "xfce.desktop"
+  register: desktopfile  
+
+- name: Move unused sessions (excluding xfce.desktop)
+  no_log: true
+  command:
+    cmd: mv "{{ item.path }}" /usr/share/xsessions.disabled/
+  loop: "{{ desktopfile.files }}"
+  when: desktopfile.files
 
 - name: Create a DIRs
   tags: configuration
@@ -86,21 +100,6 @@
      - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
      - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Application Finder.desktop, dest: /etc/skel/Desktop/Application Finder.desktop }
 
-- name: Look if the folder contains the files
-  find:
-    path: /usr/share/xsessions
-    file_type: file
-    patterns: "*.desktop"
-    excludes: "xfce.desktop"
-  register: desktopfile  
-
-- name: Move unused sessions (excluding xfce.desktop)
-  no_log: true
-  command:
-    cmd: mv "{{ item.path }}" /usr/share/xsessions.disabled/
-  loop: "{{ desktopfile.files }}"
-  when: desktopfile.files
-
 - name: Copy launcher keyboard setting 
   copy:
     src: "{{ item.src }}"
@@ -110,10 +109,6 @@
     mode: "0664"
   with_items: 
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/keyboard-settings.desktop, dest: /etc/xdg/xfce4/panel/launcher-10/keyboard-settings.desktop }
-
-- name: link the launcher
-  command:
-    cmd: ln -s /etc/xdg/xfce4/panel/launcher-10 /etc/skel/.config/xfce4/panel/launcher-10
  
 - name: copy template for control panel menu
   template:
@@ -127,9 +122,11 @@
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/conky.j2, dest: /etc/conky/conky.conf }
-  notify: restart gdm
 
-
+- name: link the launcher
+  command:
+    cmd: ln -s /etc/xdg/xfce4/panel/launcher-10 /etc/skel/.config/xfce4/panel/launcher-10
+notify: restart gdm
 
     
 
