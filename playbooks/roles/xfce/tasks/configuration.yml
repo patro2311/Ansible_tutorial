@@ -3,7 +3,12 @@
 - name: install xfce packages
   tags: configuration
   dnf:
-    name: "{{ xfce_packages }}"
+    name: 
+      - '@xfce'
+      - '@base-x'
+      - gdm
+      - xfce4-whiskermenu-plugin
+      - conky
     state: present
     update_cache: yes
   when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "9"
@@ -61,7 +66,12 @@
     owner: root
     group: root
     mode: "0755" 
-  loop: "{{ dir }}"
+  loop: 
+    - /etc/xdg/autostart
+    - /etc/skel/Desktop
+    - /etc/skel/.config/xfce4/panel
+    - /usr/share/xsessions.disabled
+    - ~/.config/autostart
 
 # - name: Create DIRs for launcher
 #   tags: configuration
