@@ -23,3 +23,4 @@
 - name: link the launcher
   command:
     cmd: ln -s /etc/xdg/xfce4/panel/launcher-10 ~/.config/xfce4/panel/launcher-10
+   notify: restart gdm
