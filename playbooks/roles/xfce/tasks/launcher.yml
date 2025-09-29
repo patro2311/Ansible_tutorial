@@ -1,7 +1,7 @@
 - name: Create DIRs for launcher
   tags: configuration
   file:
-    path: "{{ item}}"
+    path: "{{ item }}"
     state: directory
     owner: root
     group: root
