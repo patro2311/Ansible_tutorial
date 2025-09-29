@@ -8,6 +8,7 @@ xfce_packages:
 dir:
   - /etc/xdg/autostart
   - /etc/skel/Desktop
+  - /etc/skel/.config/xfce4/
   - /etc/skel/.config/xfce4/panel
   - /usr/share/xsessions.disabled
   - ~/.config/autostart
