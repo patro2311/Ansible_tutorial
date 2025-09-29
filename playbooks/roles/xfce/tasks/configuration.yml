@@ -72,7 +72,7 @@
     mode: "0644"
   with_items: 
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/keyboard.desktop, dest: /etc/xdg/xfce4/panel/launcher-10/keyboard-settings.desktop }
-    - { src: ~/.config/.config/xfce4-panel/Ansible_tutorial/playbooks/roles/xfce/files/launcher/keyboard.desktop, dest: ~/.config/xfce4/panel/launcher-10/keyboard-settings.desktop }
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/keyboard.desktop, dest: ~/.config/xfce4/panel/launcher-10/keyboard-settings.desktop }
 
 - name: Copy Shortcut to /etc/skel/Desktop
   tags: configuration
