@@ -52,7 +52,7 @@
   register: desktopfile  
 
 - name: Move unused sessions (excluding xfce.desktop)
-  no_log: true
+  no_log: false
   command:
     cmd: mv "{{ item.path }}" /usr/share/xsessions.disabled/
   loop: "{{ desktopfile.files }}"
