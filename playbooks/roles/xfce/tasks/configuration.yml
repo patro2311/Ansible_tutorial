@@ -65,13 +65,13 @@
 
 - name: Copy launcher keyboard setting 
   copy:
-    src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/launcher-6
-    dest: /etc/xdg/xfce4/panel/launcher-6
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
     owner: root
     group: root
     mode: "0644"
   with_items: 
-     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/xfce-keyboard-settings.desktop, dest: /etc/xdg/xfce4/panel/launcher-6/keyboard-settings.desktop }
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/xfce-keyboard-settings.desktop, dest: /etc/xdg/xfce4/panel/launcher-6/keyboard-settings.desktop }
 
 
 - name: Copy Shortcut to /etc/skel/Desktop
