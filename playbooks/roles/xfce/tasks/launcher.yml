@@ -7,7 +7,7 @@
     group: root
     mode: "0644" 
   loop: 
-    - etc/xdg/xfce4/panel/launcher-10
+    - /etc/xdg/xfce4/panel/launcher-10
     - ~/.config/xfce4/panel
 
 - name: Copy launcher keyboard setting 
