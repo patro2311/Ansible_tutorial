@@ -109,6 +109,7 @@
     mode: "0664"
   with_items: 
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/keyboard-settings.desktop, dest: /etc/xdg/xfce4/panel/launcher-10/keyboard-settings.desktop }
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/keyboard-settings.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-10/keyboard-settings.desktop }
  
 - name: copy template for control panel menu
   template:
@@ -122,12 +123,7 @@
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/conky.j2, dest: /etc/conky/conky.conf }
-
-- name: link the launcher
-  command:
-    cmd: ln -s /etc/xdg/xfce4/panel/launcher-10 /etc/skel/.config/xfce4/panel/launcher-10
   notify: restart gdm
-
     
 
 
