@@ -19,6 +19,6 @@
   with_items: 
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/, dest: /etc/xdg/xfce4/panel/launcher-10/xfce4-terminal.desktop }
 
-name: link the launcher
+- name: link the launcher
   command:
     cmd: ln -s /etc/xdg/xfce4/panel/launcher-10 ~/.config/xfce4/panel/launcher-10
