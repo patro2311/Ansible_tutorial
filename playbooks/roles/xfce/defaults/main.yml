@@ -10,5 +10,5 @@ dir:
   - /etc/skel/Desktop
   - /usr/share/xsessions.disabled
   - ~/.config/autostart
-  - /etc/xdg/xfce4/panel/launcher-6
+  - /etc/xdg/xfce4/panel/launcher-10
   
