@@ -54,7 +54,7 @@
   loop: 
     - /etc/xdg/autostart
     - /etc/skel/Desktop
-    - /etc/skel/.config/xfce4/panel
+    - /etc/skel/.config/xfce4/panel/launcher-10
     - /usr/share/xsessions.disabled
     - ~/.config/autostart
 
