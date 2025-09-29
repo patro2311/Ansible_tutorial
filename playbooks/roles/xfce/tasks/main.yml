@@ -5,6 +5,3 @@
 
 - name: Include configuration tasks
   include_tasks: configuration.yml
-
-- name: Include launcher tasks
-  include_tasks: launcher.yml
