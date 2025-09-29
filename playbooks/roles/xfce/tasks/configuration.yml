@@ -69,7 +69,7 @@
     dest: "{{ item.dest }}"
     owner: root
     group: root
-    mode: "0644"
+    mode: "0755"
   with_items: 
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/keyboard.desktop, dest: /etc/xdg/xfce4/panel/launcher-10/keyboard-settings.desktop }
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/keyboard.desktop, dest: ~/.config/xfce4/panel/launcher-10/keyboard-settings.desktop }
