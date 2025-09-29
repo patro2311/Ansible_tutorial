@@ -47,8 +47,7 @@
     owner: root
     group: root
     mode: "0755" 
-  loop:
-    - "{{ dir }}"
+  loop: "{{ dir }}"
 
 
 #- name: Copy conky autostart file to /etc/xdg/autostart
