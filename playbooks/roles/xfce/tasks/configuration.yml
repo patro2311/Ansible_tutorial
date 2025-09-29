@@ -51,17 +51,17 @@
     - "{{ dir }}"
 
 
-- name: Copy conky autostart file to /etc/xdg/autostart
-  tags: configuration
-  copy:
-    src: "{{ item.src}}"
-    dest: "{{ item.dest }}"
-    owner: root
-    group: root
-    mode: "0644"
-  loop:
-  #  - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/conky/conky.desktop, dest: /etc/xdg/autostart/conky.desktop }
-  # - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/conky/conky.desktop, dest: ~/.config/autostart/conky.desktop }
+#- name: Copy conky autostart file to /etc/xdg/autostart
+#  tags: configuration
+#  copy:
+#    src: "{{ item.src}}"
+#    dest: "{{ item.dest }}"
+#    owner: root
+#    group: root
+#    mode: "0644"
+#  loop:
+#     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/conky/conky.desktop, dest: /etc/xdg/autostart/conky.desktop }
+#     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/conky/conky.desktop, dest: ~/.config/autostart/conky.desktop }
 
 - name: Copy Shortcut to /etc/skel/Desktop
   tags: configuration
