@@ -17,7 +17,7 @@
     group: root
     mode: "0664"
   with_items: 
-    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/file/launcher/xfce4-terminal.desktop, dest: /etc/xdg/xfce4/panel/launcher-10/xfce4-terminal.desktop }
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/xfce4-terminal.desktop, dest: /etc/xdg/xfce4/panel/launcher-10/xfce4-terminal.desktop }
 
 - name: link the launcher
   command:
