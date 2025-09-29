@@ -63,7 +63,7 @@
 #     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/conky/conky.desktop, dest: ~/.config/autostart/conky.desktop }
 
 
- name: Copy launcher keyboard setting 
+- name: Copy launcher keyboard setting 
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
