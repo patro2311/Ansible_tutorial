@@ -1,0 +1,130 @@
+---
+
+- name: install xfce packages
+  tags: configuration
+  dnf:
+    name: 
+      - '@xfce'
+      - '@base-x'
+      - gdm
+      - xfce4-whiskermenu-plugin
+      - conky
+    state: present
+    update_cache: yes
+  when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "9"
+
+- name: enable gdm service
+  tags: configuration
+  systemd:
+    name: gdm
+    enabled: yes
+    state: started
+
+- name: Set default target to graphical.target using shell
+  shell: systemctl set-default graphical.target 
+  args:
+    executable: /bin/bash
+
+- name: Copy xfce configuration files to force xfce as default desktop environment
+  tags: configuration
+  copy:
+    src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/standard
+    dest: /etc/accountsservice/user-templates/standard
+    owner: root
+    group: root
+    mode: "0644"
+ 
+- name: Hide user options to choose other desktop environments than xfce
+  tags: configuration
+  lineinfile:
+    path: "{{ item }}"
+    regexp: '^#?WaylandEnable='
+    line: 'WaylandEnable=false'
+  with_items:
+    - /etc/gdm/custom.conf
+
+- name: Create a DIRs
+  tags: configuration
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755" 
+  loop: 
+    - /etc/xdg/autostart
+    - /etc/skel/Desktop
+    - /etc/skel/.config/xfce4/panel/launcher-10
+    - /usr/share/xsessions.disabled
+    - ~/.config/autostart
+
+- name: Look if the folder contains the files
+  find:
+    path: /usr/share/xsessions
+    file_type: file
+    patterns: "*.desktop"
+    excludes: "xfce.desktop"
+  register: desktopfile  
+
+- name: Move unused sessions (excluding xfce.desktop)
+  no_log: true
+  command:
+    cmd: mv "{{ item.path }}" /usr/share/xsessions.disabled/
+  loop: "{{ desktopfile.files }}"
+  when: desktopfile.files
+
+
+
+- name: Copy conky autostart file to /etc/xdg/autostart
+  tags: configuration
+  copy:
+    src: "{{ item.src}}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: "0644"
+  loop:
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/conky/conky.desktop, dest: /etc/xdg/autostart/conky.desktop }
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/conky/conky.desktop, dest: ~/.config/autostart/conky.desktop }
+
+- name: Copy Shortcut to /etc/skel/Desktop
+  tags: configuration
+  copy:
+    src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/
+    dest: /etc/skel/Desktop/
+    owner: root
+    group: root
+    mode: "0755"
+  with_items:
+     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Firefox.desktop, dest: /etc/skel/Desktop/Firefox.desktop }
+     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
+     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Application Finder.desktop, dest: /etc/skel/Desktop/Application Finder.desktop }
+
+- name: Copy launcher keyboard setting 
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: "0664"
+  with_items: 
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/keyboard-settings.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-10/keyboard-settings.desktop }
+ 
+- name: copy template for control panel menu
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: "0644"
+  loop:
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/keyboard-layout.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml }
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/templates/conky.j2, dest: /etc/conky/conky.conf }
+  notify: restart gdm
+    
+
+
+
