@@ -27,6 +27,11 @@
       </property>
     </property>
   </property>
+  <property name="plugin-11" type="string" value="launcher">
+   <property name="items" type="array">
+     <value type="string" value="firefox.desktop"/>
+   </property>
+  </property>
   <property name="plugins" type="empty">
     <property name="plugin-2" type="string" value="tasklist">
       <property name="grouping" type="uint" value="1"/>
@@ -58,11 +63,6 @@
     <property name="plugin-5" type="string" value="launcher">
       <property name="items" type="array">
         <value type="string" value="terminal.desktop"/>
-      </property>
-    </property>
-    <property name="plugin-11" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="firefox.desktop"/>
       </property>
     </property>
 </property>
