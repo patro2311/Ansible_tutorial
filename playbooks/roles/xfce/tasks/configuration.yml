@@ -55,6 +55,8 @@
     - /etc/xdg/autostart
     - /etc/skel/Desktop
     - /etc/skel/.config/xfce4/panel/launcher-10
+    - /etc/skel/.config/xfce4/panel/launcher-11
+    - /etc/skel/.config/xfce4/panel/launcher-5
     - /usr/share/xsessions.disabled
     - ~/.config/autostart
 
@@ -100,7 +102,7 @@
      - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
      - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/Application Finder.desktop, dest: /etc/skel/Desktop/Application Finder.desktop }
 
-- name: Copy launcher keyboard setting 
+- name: Copy Launcher keyboard setting 
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -109,7 +111,8 @@
     mode: "0664"
   with_items: 
     - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/keyboard-settings.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-10/keyboard-settings.desktop }
- 
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/terminal.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-11/terminal.desktop }
+    - { src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/launcher/firefox.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-5/firefox.desktop }
 - name: copy template for control panel menu
   template:
     src: "{{ item.src }}"
