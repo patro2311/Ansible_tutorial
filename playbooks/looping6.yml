@@ -1,0 +1,23 @@
+---
+- name: Create multiple users
+  hosts: all
+  become: true
+  tasks:
+    - name: Create a users
+      user:
+        name: "{{ item.1}}"
+        comment: "{{ item.1 | title }} {{ item.0.surename }}"
+      with_subelements:
+        - family:  ## Frist item in the list that will be looped over
+            surename: Retardos  ## item 0 in the list
+            members:
+              - john
+              - tomas
+              - jane
+        - members  ## Second item in the list that will be looped over
+        state: present
+     
+        
+          
+      
+       
