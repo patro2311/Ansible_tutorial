@@ -1,0 +1,23 @@
+---
+- name: Create multiple users
+  hosts: all
+  become: true
+  vars:
+    motd_centos: "Welcome to the {{ item }} - managed by Ansible"
+  tasks:
+    - name: Configure MOTD for CentOS
+      copy:
+        content: "{{ motd_centos }}"
+        dest: /etc/motd
+      with_items: 
+        - CentOS
+        - Debian
+      when: ansible_distribution == item
+      register: motd_result
+  
+    - name: MOTD changed
+      debug:
+        msg: "MOTD file was changed"
+      when: motd_result.changed and ansible_distribution == "CentOS"
+
+  
