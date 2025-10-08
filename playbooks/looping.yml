@@ -3,13 +3,14 @@
   hosts: all
   become: true
   vars:
-    motd_centos: "Welcome to the {{ ansible_distribution }} - managed by Ansible"
+    motd_centos: "Welcome to the {{ item }} - managed by Ansible"
   tasks:
     - name: Configure MOTD for CentOS
       copy:
         content: "{{ motd_centos }}"
         dest: /etc/motd
-      when: ansible_distribution == "CentOS"
+      with_items: [ 'CentOS', 'Debian' ]
+      when: ansible_distribution == item
       register: motd_result
   
     - name: MOTD changed
