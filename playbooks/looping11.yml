@@ -1,0 +1,12 @@
+---
+- name: Create authorized ssh keys 
+  hosts: all
+  become: true
+  tasks:
+    - name: Create ssh keys
+      authorized_key:
+        user: james
+        key: "{{ item }}" 
+      with_file:
+        - /home/james/.ssh/id_rsa.pub
+      

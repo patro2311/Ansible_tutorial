@@ -1,0 +1,10 @@
+---
+- name: Create sequence directory
+  hosts: all
+  become: true
+  tasks:
+    - name: Create a directory
+      file: 
+        dest: "/home/james/launcher-{{ item }}"
+        state: directory
+      with_sequence: start=10 end=12 format=%02d 
