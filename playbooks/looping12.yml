@@ -11,3 +11,5 @@
         group: james
       with_sequence: start=10 end=12 format=%02d 
       # can be done as follow: with_sequence: start=10 end=12 format=/home/james/launcher-%d
+      # can be done as with_sequence: count=5 format=/home/james/launcher-%x
+      
