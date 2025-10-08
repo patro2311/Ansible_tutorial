@@ -1,5 +1,5 @@
 ---
-- name: Create multiple users
+- name: Remove multiple users
   hosts: all
   become: true
   tasks:

@@ -1,0 +1,21 @@
+---
+- name: Create multiple users
+  hosts: all
+  become: true
+  tasks:
+    - name: Create a users
+      user:
+        name: "{{ item.key }}"
+        comment: "{{ item.value.fullname }}"
+        state: present
+      with_dict:
+        john:
+          fullname: "John Doe"
+        tomas:
+          fullname: "Tomas Smith"
+        jane:
+          fullname: "Jane Doe"
+        
+          
+      
+       
