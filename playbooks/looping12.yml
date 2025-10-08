@@ -5,6 +5,9 @@
   tasks:
     - name: Create a directory
       file: 
-        dest: "/home/james/launcher-{{ item }}"
+        dest: "/home/james/launcher-{{ item }}"  ## then {{ item need to be specified only }}
         state: directory
+        owner: james
+        group: james
       with_sequence: start=10 end=12 format=%02d 
+      # can be done as follow: with_sequence: start=10 end=12 format=/home/james/launcher-%d
