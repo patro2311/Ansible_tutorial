@@ -1,0 +1,34 @@
+---
+- name: Create multiple users
+  hosts: all
+  become: true
+  tasks:
+    - name: Create a users
+      user:
+        name: "{{ item.1 }}"
+        comment: "{{ item.1 | title }} {{ item.0.surename }}" # | title will capitalize the first
+        password: "{{ lookup('password', 'dev/null, length=15, chars=['digits']) | password_hash('sha512') }}"
+        state: present
+      with_subelements:
+        -  
+          - surename: Retardos  # item 0 in the list
+            members:  # item 1 in the list
+              - john
+              - tomas
+              - jane
+          - surename: Smith
+            members:
+              - joe
+              - alice
+              - bob
+          - surename: Goja
+            members:
+              - mike
+              - sara
+              - karen
+        - members  ## Second item in the list that will be looped over
+     
+        
+          
+      
+       
