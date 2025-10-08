@@ -1,0 +1,15 @@
+---
+- name: Create multiple users
+  hosts: all
+  become: true
+  tasks:
+    - name: Create common diectories 
+      file: 
+        dest: "/home/{{item.0}}/{{item.1}}"
+        state: directory
+        owner: "{{ item.0 }}"
+        group: "{{ item.0 }}"
+        mode: '0755'
+      with_together: ## pairs items from both lists together (john with kokos, tomas with pina etc)
+        - [ john, tomas, jane, alice, bob ]
+        - [ kokos, pina, citrus, ufo, banana ]
