@@ -7,6 +7,7 @@
       user:
         name: "{{ item.1}}"
         comment: "{{ item.1 | title }} {{ item.0.surename }}"
+        state: present
       with_subelements:
         - family:  ## Frist item in the list that will be looped over
             surename: Retardos  ## item 0 in the list
@@ -15,7 +16,6 @@
               - tomas
               - jane
         - members  ## Second item in the list that will be looped over
-        state: present
      
         
           
