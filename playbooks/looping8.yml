@@ -7,7 +7,7 @@
       user:
         name: "{{ item.1 }}"
         comment: "{{ item.1 | title }} {{ item.0.surename }}" # | title will capitalize the first
-        password: "{{ lookup('password', 'dev/null, length=15, chars=['digits,ascii_letters,hexdigits') | password_hash('sha512') }}"
+        password: "{{ lookup('password', 'dev/null', seed=inventory_hostname) | password_hash('sha512') }}"
         state: present
       with_subelements:
         -  
