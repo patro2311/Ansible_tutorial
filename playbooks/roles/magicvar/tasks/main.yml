@@ -1,7 +1,7 @@
 ---
 - name: Using template, create a remote file that contains all variables available t othe play
   template:
-    src: magicvar.j2
+    src: /home/patrik/GIT/Ansible_tutorial/playbooks/magicvar/templates/magicvar.j2
     dest: /tmp/ansible_variables
 
 - name: Fetch the file with all variables to the control node
