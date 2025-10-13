@@ -1,0 +1,16 @@
+---
+- name: Using template, create a remote file that contains all variables available t othe play
+  template:
+    src: magicvar.j2
+    dest: /tmp/ansible_variables
+
+- name: Fetch the file with all variables to the control node
+  fetch:
+    src: /tmp/ansible_variables
+    dest:  /home/patrik/variable
+    flat: true
+
+- name: Clean up the left over file on the remote host
+  file:
+    src: /tmp/ansible_variables
+    state: absent
