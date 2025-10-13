@@ -7,7 +7,7 @@
 - name: Fetch the file with all variables to the control node
   fetch:
     src: /tmp/ansible_variables
-    dest:  "captured_variables/{{ ansible_hostname }}"
+    dest:  "/home/patrik/capture_variables/{{ ansible_hostname }}"
     flat: true
 
 - name: Clean up the left over file on the remote host
