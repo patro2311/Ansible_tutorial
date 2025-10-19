@@ -33,8 +33,8 @@
     group: root
     mode: 0440
   with_items: 
-    - { src: '/home/patrik/playbooks/roles/base/files/sudoers_patrik', dest: '/etc/sudoers.d/patrik' }
-    - { src: '/home/patrik/playbooks/roles/base/files/sudoers_ansible-admin', dest: '/etc/sudoers.d/ansible-admin' }
+    - { src: '/home/patrik/Ansible_tutorial/playbooks/roles/base/files/sudoers_patrik', dest: '/etc/sudoers.d/patrik' }
+    - { src: '/home/patrik/Ansible_tutorial/playbooks/roles/base/files/sudoers_ansible-admin', dest: '/etc/sudoers.d/ansible-admin' }
 
 - name: generate sshd_config file from template
   tags: ssh
