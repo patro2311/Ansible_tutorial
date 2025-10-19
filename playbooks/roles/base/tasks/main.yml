@@ -1,5 +1,5 @@
 - name: include tasks to update OS packages
   include_tasks: updateOS.yml
 
-# - name: include tasks to create users and configure ssh/sudo
-#   include_tasks: users.yml
+- name: include tasks to create users and configure ssh/sudo
+  include_tasks: users.yml
