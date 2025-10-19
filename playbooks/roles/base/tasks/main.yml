@@ -1,32 +1,5 @@
-- name: Add user Simon
-  tags: always
-  user:
-    name: simon
-    groups: root
+- name: include tasks to update OS packages
+  include_tasks: updateOS.yml
 
-
-- name: Add ssh key for Simon
-  tags: always, ssh-key
-  authorized_key:
-    user: simon
-    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOo1JA/Cp9Bdxs0vVr6yd7urXYReA03h8VoU+Opf1Bxb ANSIBLE"
-
-
-- name: Add sudoers file for Simon
-  tags: always, sudo
-  copy:
-    src: sudoer_simon
-    dest: /etc/sudoers.d/simon
-    owner: root
-    group: root
-    mode: 0440
-
-- name: generate sshd_config file from template
-  tags: ssh
-  template:
-    src: "{{ ssh_template_file }}" 
-    dest: /etc/ssh/sshd_config
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart_sshd
+# - name: include tasks to create users and configure ssh/sudo
+#   include_tasks: users.yml

@@ -1,0 +1,46 @@
+- name: Create patrik and ansible users
+  tags: always
+  user:
+    name: "{{ item.key }}"
+    comment: "{{ item.value.fullname }}"
+    state: present
+    group: root
+    append: true
+  with_dict:
+    patrik:
+      fullname: "Patrik Bily"
+    ansible-admin:
+      fullname: "Ansible automation-account"
+
+- name: Add ssh key for patrik and ansible-admin users
+  tags: always, ssh-key
+  authorized_key:
+    user: "{{ item.key }}"
+    key: "{{ item.value.ssh_key }}"
+  with_dict:
+    patrik:
+      ssh_key: "{{ lookup('file', '~/.ssh/patrik_default.pub' }}"
+    ansible-admin:
+      ssh_key: "{{ lookup('file', '~/.ssh/ansible.pub' }}"
+
+- name: Add sudoers files for admin users (patrik & ansible-admin)
+  tags: always, sudo
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0440
+  with_items: 
+    - { src: /playbooks/roles/base/files/sudoers_patrik, dest: /etc/sudoers.d/patrik }
+    - { src: /playbooks/roles/base/files/sudoers_ansible-admin, dest: /etc/sudoers.d/ansible-admin }
+
+- name: generate sshd_config file from template
+  tags: ssh
+  template:
+    src: /playbooks/roles/base/templates/sshd_config_centos.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart_sshd
