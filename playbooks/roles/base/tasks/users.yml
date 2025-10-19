@@ -19,7 +19,7 @@
     key: "{{ item.value.ssh_key }}"
   with_dict:
     patrik:
-      ssh_key: "{{ lookup('file', '~/.ssh/patrik_default.pub' }}"
+      ssh_key: "{{ lookup('file', '~/.ssh/patrik.pub' }}"
     ansible-admin:
       ssh_key: "{{ lookup('file', '~/.ssh/ansible.pub' }}"
 
