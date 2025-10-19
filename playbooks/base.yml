@@ -1,0 +1,6 @@
+---
+- name: Create patrik and ansible users and Update OS packages
+  hosts: all
+  become: yes
+  roles:
+    - base
