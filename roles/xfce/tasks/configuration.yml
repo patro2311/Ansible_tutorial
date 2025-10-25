@@ -3,11 +3,7 @@
   tags: configuration
   dnf:
     name: 
-      - '@xfce'
-      - '@base-x'
-      - gdm
-      - xfce4-whiskermenu-plugin
-      - conky
+      - "{{ desktop_xfce4_packages }}"
     state: present
     update_cache: true
   when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "9"
@@ -75,7 +71,6 @@
   register: desktopfile  
 
 - name: Move unused sessions (excluding xfce.desktop)
-  no_log: true
   command:
     cmd: mv "{{ item.path }}" /usr/share/xsessions.disabled/
   loop: "{{ desktopfile.files }}"
