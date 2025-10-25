@@ -1,5 +1,4 @@
 ---
-
 - name: Include repo task
   include_tasks: repo.yml
 
