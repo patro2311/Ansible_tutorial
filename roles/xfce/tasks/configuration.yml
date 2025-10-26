@@ -91,15 +91,15 @@
 - name: Copy Shortcut to /etc/skel/Desktop
   tags: configuration
   copy:
-    src: /home/patrik/Ansible_tutorial/playbooks/roles/xfce/files/shortcuts/
-    dest: /etc/skel/Desktop/
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
     owner: root
     group: root
     mode: "0755"
   with_items:
-     - { src: /xfce/files/shortcuts/Firefox.desktop, dest: /etc/skel/Desktop/Firefox.desktop }
-     - { src: /xfce/files/shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
-     - { src: /xfce/files/shortcuts/Application Finder.desktop, dest: /etc/skel/Desktop/Application Finder.desktop }
+     - { src: /shortcuts/Firefox.desktop, dest: /etc/skel/Desktop/Firefox.desktop }
+     - { src: /shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
+     - { src: /shortcuts/Application Finder.desktop, dest: /etc/skel/Desktop/Application Finder.desktop }
 
 - name: Copy launcher keyboard setting 
   copy:
@@ -109,7 +109,7 @@
     group: root
     mode: "0664"
   with_items: 
-    - { src: /xfce/files/launcher/keyboard-settings.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-20/keyboard-settings.desktop }
+    - { src: /launcher/keyboard-settings.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-20/keyboard-settings.desktop }
  
 - name: copy template for control panel menu
   template:
@@ -119,11 +119,11 @@
     group: root
     mode: "0644"
   loop:
-    - { src: /xfce/templates/xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
-    - { src: /xfce/templates/xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
-    - { src: /xfce/templates/keyboard-layout.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml }
-    - { src: /xfce/templates/whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
-    # - { src: /xfce/templates/conky.j2, dest: /etc/conky/conky.conf }
+    - { src: xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
+    - { src: xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
+    - { src: keyboard-layout.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml }
+    - { src: whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
+    # - { src: conky.j2, dest: /etc/conky/conky.conf }
   notify: restart gdm
     
 
