@@ -4,7 +4,9 @@
     name: "{{ item.key }}"
     comment: "{{ item.value.fullname }}"
     state: present
-    group: root
+    group: wheel
+    create_home: yes
+    shell: /bin/bash
     append: true
   with_dict:
     patrik:
