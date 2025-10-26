@@ -19,10 +19,10 @@
     key: "{{ item.value.ssh_key }}"
   with_dict:
     patrik:
-      ssh_key: "{{ lookup('file', '/home/{{ ansible_user_id }}/.ssh/patrik.pub') }}"
+      ssh_key: "{{ lookup('file', '/home/admin/.ssh/patrik.pub') }}"
     ansible-admin:
-      ssh_key: "{{ lookup('file', '/home/{{ ansible_user_id }}/.ssh/ansible.pub') }}"
-  no_log: false
+      ssh_key: "{{ lookup('file', '/home/admin/.ssh/ansible.pub') }}"
+  no_log: true
 
 - name: Add sudoers files for admin users (patrik & ansible-admin)
   tags: always, sudo
