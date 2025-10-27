@@ -2,8 +2,7 @@
 - name: install xfce packages
   tags: configuration
   dnf:
-    name: 
-      - "{{ desktop_xfce4_packages }}"
+    name: "{{ desktop_xfce4_packages }}"
     state: present
     update_cache: true
   when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "9"
