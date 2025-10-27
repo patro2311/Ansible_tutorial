@@ -64,7 +64,7 @@
     owner: root
     group: root
     mode: "0755"
-  with_sequence: start=20 end=23 format=%02d 
+  with_sequence: start=13 end=15 format=%02d 
   
 - name: Look if the folder contains the files
   find:
@@ -113,9 +113,9 @@
     group: root
     mode: "0664"
   with_items: 
-    - { src: launcher/keyboard-settings.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-20/keyboard-settings.desktop }
-    - { src: launcher/firefox.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-21/firefox.desktop }
-    - { src: launcher/terminal.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-22/terminal.desktop }
+    - { src: launcher/keyboard-settings.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-13/keyboard-settings.desktop }
+    - { src: launcher/firefox.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-14/firefox.desktop }
+    - { src: launcher/terminal.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-15/terminal.desktop }
     
 - name: copy template for control panel menu
   template:
