@@ -61,6 +61,15 @@
     group: root
     mode: "0755"
   with_sequence: start=20 end=23 format=/etc/skel/.config/xfce4/panel/launcher-format=%02d 
+
+- name: Copy launchers setting to the direcrories
+  copy:
+    src: /launcher/
+    dest: /etc/skel/.config/xfce4/panel/launcher-{{ item }}/
+    owner: root
+    group: root
+    mode: "0664"
+  with_sequence: start=20 end=23 format=%02d
   
 - name: Look if the folder contains the files
   find:
@@ -110,7 +119,9 @@
     mode: "0664"
   with_items: 
     - { src: /launcher/keyboard-settings.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-20/keyboard-settings.desktop }
- 
+    - { src: /launcher/firefox.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-21/firefox.desktop }
+    - { src: /launcher/terminal.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-22/terminal.desktop }
+    
 - name: copy template for control panel menu
   template:
     src: "{{ item.src }}"

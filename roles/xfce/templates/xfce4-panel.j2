@@ -1,36 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<channel name="xfce4-panel" version="1.0">
+<channel name="xfce4-panel" version="1.0" locked="*" unlocked="root">
   <property name="configver" type="int" value="2"/>
+  <property name="dark-mode" type="empty"/>
   <property name="panels" type="array">
     <value type="int" value="1"/>
-    <property name="dark-mode" type="bool" value="true"/>
     <property name="panel-1" type="empty">
-      <property name="position" type="string" value="p=8;x=640;y=782"/>
+      <property name="position" type="string" value="p=8;x=640;y=781"/>
       <property name="length" type="uint" value="100"/>
       <property name="position-locked" type="bool" value="true"/>
       <property name="icon-size" type="uint" value="0"/>
-      <property name="size" type="uint" value="33"/>
+      <property name="size" type="uint" value="31"/>
       <property name="plugin-ids" type="array">
-        <value type="int" value="13"/>
         <value type="int" value="1"/>
-        <value type="int" value="7"/>
-        <value type="int" value="4"/>
+        <value type="int" value="14"/>
+        <value type="int" value="16"/>
         <value type="int" value="2"/>
         <value type="int" value="3"/>
         <value type="int" value="5"/>
         <value type="int" value="11"/>
-        <value type="int" value="20"/>
-        <value type="int" value="8"/>
+        <value type="int" value="7"/>
         <value type="int" value="12"/>
-        <value type="int" value="9"/>
+        <value type="int" value="10"/>
+        <value type="int" value="13"/>
+        <value type="int" value="17"/>
+        <value type="int" value="18"/>
+        <value type="int" value="19"/>
       </property>
     </property>
-  </property>
-  <property name="plugin-11" type="string" value="launcher">
-   <property name="items" type="array">
-     <value type="string" value="firefox.desktop"/>
-   </property>
+    <property name="dark-mode" type="bool" value="true"/>
   </property>
   <property name="plugins" type="empty">
     <property name="plugin-2" type="string" value="tasklist">
@@ -40,30 +38,42 @@
       <property name="expand" type="bool" value="true"/>
       <property name="style" type="uint" value="0"/>
     </property>
+    <property name="plugin-5" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-11" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
     <property name="plugin-12" type="string" value="clock"/>
     <property name="plugin-13" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
-      <property name="expand" type="bool" value="false"/>
+    </property>
+    <property name="plugin-7" type="string" value="separator"/>
+    <property name="plugin-14" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
     </property>
     <property name="plugin-1" type="string" value="whiskermenu"/>
-    <property name="plugin-4" type="string" value="separator">
-      <property name="style" type="uint" value="0"/>
-      <property name="expand" type="bool" value="false"/>
-    </property>
-    <property name="plugin-7" type="string" value="separator">
+    <property name="plugin-10" type="string" value="separator"/>
+    <property name="plugin-16" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
-    <property name="plugin-8" type="string" value="separator"/>
-    <property name="plugin-9" type="string" value="separator"/>
-    <property name="plugin-20" type="string" value="launcher">
+    <!-- Firefox Browser -->
+    <property name="plugin-17" type="string" value="launcher">
       <property name="items" type="array">
-        <value type="string" value="keyboard-settings.desktop"/>
+        <value type="string" value="firefox-browser.desktop"/>
       </property>
     </property>
-    <property name="plugin-5" type="string" value="launcher">
+    <!-- File-Manager -->
+    <property name="plugin-18" type="string" value="launcher">
       <property name="items" type="array">
-        <value type="string" value="terminal.desktop"/>
+        <value type="string" value="file-manager.desktop"/>
       </property>
     </property>
-</property>
+    <!-- Terminal-emulator -->
+    <property name="plugin-19" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="terminal-xfce.desktop"/>
+      </property>
+    </property>
+  </property>
 </channel>
