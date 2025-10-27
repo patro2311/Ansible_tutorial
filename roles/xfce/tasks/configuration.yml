@@ -64,7 +64,7 @@
     owner: root
     group: root
     mode: "0755"
-  with_sequence: start=20 end=23 format=/etc/skel/.config/xfce4/panel/launcher-format=%02d 
+  with_sequence: start=20 end=23 format=/etc/skel/.config/xfce4/panel/launcher-%02d 
   
 - name: Look if the folder contains the files
   find:
