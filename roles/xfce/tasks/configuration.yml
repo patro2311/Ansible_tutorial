@@ -105,7 +105,7 @@
      - { src: shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
      - { src: shortcuts/Application Finder.desktop, dest: /etc/skel/Desktop/Application Finder.desktop }
 
-- name: Copy launcher keyboard setting 
+- name: Copy launcher shortcuts for panel 
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -113,9 +113,9 @@
     group: root
     mode: "0664"
   with_items: 
-    - { src: launcher/keyboard-settings.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-13/keyboard-settings.desktop }
-    - { src: launcher/firefox.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-14/firefox.desktop }
-    - { src: launcher/terminal.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-15/terminal.desktop }
+    - { src: launcher/file-manager.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-13/file-manager.desktop }
+    - { src: launcher/terminal.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-14/terminal.desktop }
+    - { src: launcher/firefox.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-15/firefox.desktop }
     
 - name: copy template for control panel menu
   template:
@@ -125,7 +125,7 @@
     group: root
     mode: "0644"
   loop:
-    # - { src: xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
+    - { src: xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
     - { src: xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
     - { src: keyboard-layout.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml }
     - { src: whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
