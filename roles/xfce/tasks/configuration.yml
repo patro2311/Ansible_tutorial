@@ -28,7 +28,7 @@
 - name: Copy xfce configuration files to force xfce as default desktop environment
   tags: configuration
   copy:
-    src: /xfce/files/standard
+    src: standard
     dest: /etc/accountsservice/user-templates/standard
     owner: root
     group: root
