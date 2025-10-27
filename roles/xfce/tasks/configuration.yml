@@ -89,7 +89,7 @@
 #     group: root
 #     mode: "0644"
 #   loop:
-#     - { src: '/conky/conky.desktop', dest: '/etc/xdg/autostart/conky.desktop' }
+#     - { src: 'conky/conky.desktop', dest: '/etc/xdg/autostart/conky.desktop' }
 #     - { src: 'conky/conky.desktop', dest: '~/.config/autostart/conky.desktop' }
 
 - name: Copy Shortcut to /etc/skel/Desktop
@@ -101,9 +101,9 @@
     group: root
     mode: "0755"
   with_items:
-     - { src: /shortcuts/Firefox.desktop, dest: /etc/skel/Desktop/Firefox.desktop }
-     - { src: /shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
-     - { src: /shortcuts/Application Finder.desktop, dest: /etc/skel/Desktop/Application Finder.desktop }
+     - { src: shortcuts/Firefox.desktop, dest: /etc/skel/Desktop/Firefox.desktop }
+     - { src: shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
+     - { src: shortcuts/Application Finder.desktop, dest: /etc/skel/Desktop/Application Finder.desktop }
 
 - name: Copy launcher keyboard setting 
   copy:
@@ -113,9 +113,9 @@
     group: root
     mode: "0664"
   with_items: 
-    - { src: /launcher/keyboard-settings.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-20/keyboard-settings.desktop }
-    - { src: /launcher/firefox.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-21/firefox.desktop }
-    - { src: /launcher/terminal.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-22/terminal.desktop }
+    - { src: launcher/keyboard-settings.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-20/keyboard-settings.desktop }
+    - { src: launcher/firefox.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-21/firefox.desktop }
+    - { src: launcher/terminal.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-22/terminal.desktop }
     
 - name: copy template for control panel menu
   template:
