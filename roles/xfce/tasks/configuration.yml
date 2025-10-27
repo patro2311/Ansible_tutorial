@@ -80,17 +80,17 @@
   loop: "{{ desktopfile.files }}"
   when: desktopfile.files
 
-- name: Copy conky autostart file to /etc/xdg/autostart
-  tags: configuration
-  copy:
-    src: "{{ item.src}}"
-    dest: "{{ item.dest }}"
-    owner: root
-    group: root
-    mode: "0644"
-  loop:
-    - { src: /conky/conky.desktop, dest: /etc/xdg/autostart/conky.desktop }
-    - { src: conky/conky.desktop, dest: ~/.config/autostart/conky.desktop }
+# - name: Copy conky autostart file to /etc/xdg/autostart
+#   tags: configuration
+#   copy:
+#     src: "{{ item.src}}"
+#     dest: "{{ item.dest }}"
+#     owner: root
+#     group: root
+#     mode: "0644"
+#   loop:
+#     - { src: '/conky/conky.desktop', dest: '/etc/xdg/autostart/conky.desktop' }
+#     - { src: 'conky/conky.desktop', dest: '~/.config/autostart/conky.desktop' }
 
 - name: Copy Shortcut to /etc/skel/Desktop
   tags: configuration
@@ -129,7 +129,7 @@
     - { src: xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
     - { src: keyboard-layout.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml }
     - { src: whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
-    - { src: conky.j2, dest: /etc/conky/conky.conf }
+    # - { src: conky.j2, dest: /etc/conky/conky.conf }
   notify: restart gdm
     
 
