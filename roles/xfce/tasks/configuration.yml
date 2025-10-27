@@ -1,7 +1,7 @@
 ---
 - name: install xfce packages
   tags: configuration
-  package:
+  dnf:
     name: 
       - "{{ desktop_xfce4_packages }}"
     state: present
