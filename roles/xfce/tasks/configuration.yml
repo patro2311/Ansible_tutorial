@@ -3,7 +3,7 @@
   tags: configuration
   dnf:
     name: 
-      - firefox
+      # - firefox
       - '@xfce'
       - '@base-x'
       - gdm
