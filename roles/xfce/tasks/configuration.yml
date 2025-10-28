@@ -117,21 +117,21 @@
     - { src: launcher/file-manager.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-13/file-manager.desktop }
     - { src: launcher/terminal.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-14/terminal.desktop }
     - { src: launcher/firefox.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-15/firefox.desktop }
-    
-- name: copy template for control panel menu
-  template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    owner: root
-    group: root
-    mode: "0644"
-  loop:
-   # - { src: xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
-   # - { src: xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
-    - { src: keyboard-layout.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml }
-   # - { src: whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
-    # - { src: conky.j2, dest: /etc/conky/conky.conf }
   notify: restart gdm
+# - name: copy template for control panel menu
+#   template:
+#     src: "{{ item.src }}"
+#     dest: "{{ item.dest }}"
+#     owner: root
+#     group: root
+#     mode: "0644"
+#   loop:
+#     - { src: xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
+#     - { src: xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
+#     - { src: keyboard-layout.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml }
+#     - { src: whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
+#     # - { src: conky.j2, dest: /etc/conky/conky.conf }
+#   notify: restart gdm
     
 
 
