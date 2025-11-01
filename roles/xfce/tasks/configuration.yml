@@ -55,8 +55,8 @@
   loop: 
     - /etc/xdg/autostart
     - /etc/skel/Desktop
+    - /etc/skel/.config/autostart
     - /usr/share/xsessions.disabled
-    - ~/.config/autostart
 
 - name: Create a Launcher direcrories
   ansible.builtin.file:
@@ -106,7 +106,7 @@
     - { src: launcher/terminal.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-14/terminal.desktop }
     - { src: launcher/firefox.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-15/firefox.desktop }
     # CONKY
-    - { src: 'conky/conky.desktop', dest: '~/.config/autostart/conky.desktop' }
+    - { src: 'conky/conky.desktop', dest: '/etc/skel/.config/autostart/conky.desktop' }
 
 - name: copy template for control panel menu
   template:
