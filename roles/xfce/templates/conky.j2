@@ -32,11 +32,13 @@ conky.config = {
 conky.text = [[
 HostName: ${nodename}
 
-User: ${USERNAME}
+User: ${ansible_user_id}
 
-OS Version: ${exec grep '^PRETTY_NAME=' /etc/os-release | cut -d= -f2 | tr -d '"'}
+Note_name: ${ansible_nodename}
+# OS Version: ${exec grep '^PRETTY_NAME=' /etc/os-release | cut -d= -f2 | tr -d '"'}
+OS Version: ${ansible_distribution} ${ansible_distribution_version}
 
-IP_address: ${addr ens33}
+IP_address: ${addr ansible_all_ipv4_addresses}
 
 MacAddress: ${exec cat /sys/class/net/ens33/address}
 ]]
