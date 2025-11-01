@@ -1,13 +1,13 @@
 ---
 - name: Using template, create a remote file that contains all variables available t othe play
   template:
-    src: /home/patrik/Ansible_tutorial/playbooks/roles/magicvar/templates/dump_variables.j2
+    src: dump_variables.j2
     dest: /tmp/ansible_variables
 
 - name: Fetch the file with all variables to the control node
   fetch:
     src: /tmp/ansible_variables
-    dest:  "/home/patrik/capture_variables/{{ ansible_hostname }}"
+    dest:  "/home/admin/capture_variables/{{ ansible_hostname }}"
     flat: true
 
 - name: Clean up the left over file on the remote host
