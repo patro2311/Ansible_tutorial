@@ -1,6 +1,6 @@
 ---
 
-- hosts: xfce4
+- hosts: xfce
   become: true
   roles:
     - xfce4
