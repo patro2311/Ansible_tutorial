@@ -1,2 +1,28 @@
 ---
 # vars file for xfce4
+xfce4_packages:
+  - firefox
+  - '@xfce'
+  - '@base-x'
+  - gdm
+  - xfce4-whiskermenu-plugin
+  - conky
+
+templates_for_control_panel_menu:
+  - { src: xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
+  - { src: xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
+  - { src: keyboard-layout.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml }
+  - { src: whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
+  - { src: conky.j2, dest: /etc/conky/conky.conf }
+
+launcher_and_conky_files:
+  - { src: launcher/file-manager.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-13/file-manager.desktop }
+  - { src: launcher/terminal.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-14/terminal.desktop }
+  - { src: launcher/firefox.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-15/firefox.desktop }
+  # CONKY
+  - { src: 'conky/conky.desktop', dest: '/etc/skel/.config/autostart/conky.desktop' }
+
+shortcuts_for_desktop:
+  - { src: shortcuts/Firefox.desktop, dest: /etc/skel/Desktop/Firefox.desktop }
+  - { src: shortcuts/Terminal.desktop, dest: /etc/skel/Desktop/Terminal.desktop }
+  - { src: shortcuts/Application Finder.desktop, dest: /etc/skel/Desktop/Application Finder.desktop }
