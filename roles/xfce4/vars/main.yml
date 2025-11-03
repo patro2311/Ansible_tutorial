@@ -2,11 +2,12 @@
 # vars file for xfce4
 xfce4_packages:
   - firefox
-  - '@xfce'
-  - '@base-x'
   - gdm
   - xfce4-whiskermenu-plugin
   - conky
+xfce4_group_packages:
+  - '@xfce'
+  - '@base-x'
 
 templates_for_control_panel_menu:
   - { src: xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }

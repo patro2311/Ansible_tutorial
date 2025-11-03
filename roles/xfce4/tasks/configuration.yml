@@ -4,6 +4,7 @@
   dnf:
     name: 
       - "{{ xfce4_packages }}"
+      - "{{ xfce4_group_packages }}"
     state: present
     update_cache: true
   when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "9"
