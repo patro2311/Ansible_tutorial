@@ -1,6 +1,6 @@
 ---
 
-- hosts: xfce4
+- hosts: all
   become: true
   roles:
-    - xfce4
+    - magicvar
