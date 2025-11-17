@@ -111,8 +111,7 @@
     owner: root
     group: root
     mode: "0644"
-  loop: 
-    - "{{ templates_for_control_panel_menu_and_firefox_policies }}"
+  loop: "{{ templates_for_control_panel_menu_and_firefox_policies }}"
   notify: restart gdm
     
 
