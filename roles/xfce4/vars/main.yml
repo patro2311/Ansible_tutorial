@@ -5,15 +5,17 @@ xfce4_packages:
   - gdm
   - xfce4-whiskermenu-plugin
   - conky
-  # - '@xfce'
-  # - '@base-x'
+  - '@xfce'
+  - '@base-x'
 
-templates_for_control_panel_menu:
+templates_for_control_panel_menu_and_firefox_policies:
   - { src: xfce4-panel.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml }
   - { src: xfce4-desktop.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml }
   - { src: keyboard-layout.j2, dest: /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml }
   - { src: whisper-menu.j2, dest: /etc/xdg/xfce4/panel/whiskermenu-1.rc }
   - { src: conky.j2, dest: /etc/conky/conky.conf }
+  # Firefox policies
+  - { src: firefox/policies.json.j2, dest: /etc/firefox/policies/policies.json }
 
 launcher_and_conky_files:
   - { src: launcher/file-manager.desktop, dest: /etc/skel/.config/xfce4/panel/launcher-13/file-manager.desktop }
