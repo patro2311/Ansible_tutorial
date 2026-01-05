@@ -20,3 +20,18 @@ if "%1%" == "postcustomization" (
 )
 
 exit
+
+
+# its working 
+Start-Process powershell.exe -ArgumentList '-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', '
+  Enable-PSRemoting -Force;
+  $cert = New-SelfSignedCertificate -CertStoreLocation Cert:\LocalMachine\My -Dnsname "$env:COMPUTERNAME" -Subject "CN=$env:COMPUTERNAME" -KeyAlgorithm RSA -KeyLength 2048 -NotAfter (Get-Date).AddYears(1) -FriendlyName ''WinRM Cert'';
+  $thumbprint = $cert.Thumbprint;
+   Write-Host ''WinRM HTTPS listener created successfully.'' ' -Verb RunAs
+
+
+
+
+
+
+
