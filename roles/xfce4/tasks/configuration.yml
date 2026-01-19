@@ -1,17 +1,32 @@
 ---
 - name: install xfce packages
   tags: configuration
-  dnf:
-    name: 
-      - firefox
-      - gdm
-      - xfce4-whiskermenu-plugin
-      - conky
-      - '@xfce'
-      - '@base-x'
-    state: present
-    update_cache: true
-  when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "9"
+  block:
+    - name: Install xfce packages for "RedHat"
+      dnf:
+        name: 
+         - firefox
+         - gdm
+         - xfce4-whiskermenu-plugin
+         - conky
+         - '@xfce'
+         - '@base-x'
+        state: present
+        update_cache: true
+      when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "9"
+    
+    - name: Install KVM packages for "RedHat""
+      when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "9"
+      dnf:
+        name: "{{ item }}"
+        state: present
+        update_cache: true
+      loop:
+        - qemu-kvm
+        - libvirt
+        - virt-install
+        - virt-manager
+        - virt-viewer
 
 - name: enable gdm service
   tags: configuration
